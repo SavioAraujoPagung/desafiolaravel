@@ -13,11 +13,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware([])->group(function(){
+    Route::prefix('adicionar')->group(function(){
+        Route::get('/colecao', function(){
+            return 'colecao';
+        });
+        Route::get('/modelo', function(){
+            return 'modelo';
+        }); 
+        Route::get('/processo', function(){
+            return 'processo';
+        });
+        Route::get('/tarefa', function(){
+            return 'tarefa';
+        });
+        Route::get('/usuario', function(){
+            return 'usuario';
+        });
+        Route::redirect('/', view('iniciar.welcome'));
+    });
 });
 
-
-Route::get('/teste', function(){
-    return view('teste.teste');
+Route::get('/', function () {
+    return view('iniciar.welcome');
 });
