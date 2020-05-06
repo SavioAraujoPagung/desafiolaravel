@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Model\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,26 +13,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::any('tarefas/search', 'ModelController\TarefaController@search')->name('tarefas.search');
+//Route::middleware([''])->group(function(){
+    Route::resource('usuario', 'ModelController\UsuarioController');
+    Route::resource('tarefa', 'ModelController\TarefaController');
+    Route::resource('processo', 'ModelController\ProcessoController');
+    Route::resource('modelo', 'ModelController\ModeloController');
+    Route::resource('colecao', 'ModelController\ColecaoController');
+//});
 
-Route::middleware([])->group(function(){
-    Route::prefix('adicionar')->group(function(){
-        Route::get('/colecao', function(){
-            return 'colecao';
-        });
-        Route::get('/modelo', function(){
-            return 'modelo';
-        }); 
-        Route::get('/processo', function(){
-            return 'processo';
-        });
-        Route::get('/tarefa', function(){
-            return 'tarefa';
-        });
-        Route::get('/usuario', function(){
-            return 'usuario';
-        });
-        Route::redirect('/', view('iniciar.welcome'));
-    });
+Route::get('login', function () {
+    return'login';
 });
 
 Route::get('/', function () {
