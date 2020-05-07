@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 
 class TarefaController extends Controller
 {   
-    public  $request;
-    public   $tarefa;
+    public $request;
+    public  $tarefa;
 
 
     public function __construct(Request $request, Tarefa $tarefa)
@@ -127,11 +127,11 @@ class TarefaController extends Controller
      */
     public function destroy($id)
     {
-        $produto = Tarefa::find($id);
+        $tarefa = Tarefa::find($id);
 
-        if($produto)
+        if($tarefa)
         {
-            $produto->delete();
+            $tarefa->delete();
             return redirect()->route('tarefa.index');
         }
         return redirect()->back();

@@ -13,6 +13,7 @@
     <input type="text" name="filtro" placeholder="Filtrar: Nome" class="form control" value="{{$filtrados['filtro'] ?? ''}}"> <br><br>
     <button type="submit" class="btn btn-info">Filtrar</button>
 </form>
+
     <table class = "table table-striped table-dark" >
         <thead >
             <tr>

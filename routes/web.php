@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Model\UsuarioController;
+use App\Http\Controllers\ModelController\FaccaoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::any('tarefas/search', 'ModelController\TarefaController@search')->name('tarefas.search');
+Route::any('faccoes/search', 'ModelController\FaccaoController@search')->name('faccoes.search');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin', 'ModelController\FaccaoController@index')->name('admin');
+
 Route::middleware(['auth'])->group(function(){
     Route::resource('faccao', 'ModelController\FaccaoController');
     Route::resource('tarefa', 'ModelController\TarefaController');
@@ -32,4 +36,3 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');

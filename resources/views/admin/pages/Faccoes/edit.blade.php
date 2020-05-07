@@ -3,17 +3,20 @@
 @section('title', 'Editar Usuário')
 
 @section('content')
-    <h1>Editar Usuario/Facção</h1>
-    
-    <form action="{{route('faccao.update', $id)}}" method="POST">
+    <h1>Editar Facção</h1>
+    <a href={{route('faccao.index')}}><< Voltar </a>
+    <hr>
+    <form action="{{route('faccao.update', $faccao->id)}}" method="POST">
         @csrf
         @method('PUT')
-        <input type="text" name = "nomeFantasia" placeholder="Nome Fantasia"> <br>
-        <input type="text" name = "razaoSocial" placeholder="Razão Social"> <br>
-        <input type="text" name = "endereco" placeholder="Endereço"> <br>
-        <input type="text" name = "telefone" placeholder="Telefone"> <br>
-        <input type="text" name = "cnpj" placeholder="CNPJ"> <br>
-        <input type="password" name = "senha" placeholder="********"> <br>
-        <button type="submit">Editar</button>
+    
+        <div class="form-group"><input type="text" name = "nomeFantasia" placeholder="Nome Fantasia" value={{$faccao->nomeFantasia}}> </div>
+        <div class="form-group"><input type="text" name = "razaoSocial"  placeholder="Razão Social"  value={{$faccao->razaoSocial}}> </div>
+        <div class="form-group"><input type="text" name = "endereco"     placeholder="Endereço"      value={{$faccao->endereco}}> </div>
+        <div class="form-group"><input type="text" name = "telefone"     placeholder="Telefone"      value={{$faccao->telefone}}> </div>
+        <div class="form-group"><input type="text" name = "cnpj"         placeholder="CNPJ"          value={{$faccao->cnpj}}> </div>
+        <div class="form-group"><input type="text" name = "situacao"     placeholder="Situaçao"      value={{$faccao->situacao}}> </div>
+
+        <div class="form-group"><button type="submit">Editar</button> 
     </form>
 @endsection

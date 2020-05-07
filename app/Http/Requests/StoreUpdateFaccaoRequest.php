@@ -25,7 +25,7 @@ class StoreUpdateFaccaoRequest extends FormRequest
     {
         return [
             'nomeFantasia' => 'required | min:1 | max:255',
-            'rezaoSocial' => 'required | min:1 | max:255',
+            'razaoSocial' => 'required | min:1 | max:255',
             'endereco' => 'required | min:1 | max:255',
             'telefone' => 'required | min:11 | max:11',
             'cnpj' => 'required | min:14 | max:14',

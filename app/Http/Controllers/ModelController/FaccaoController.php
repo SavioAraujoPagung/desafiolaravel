@@ -9,9 +9,11 @@ use Illuminate\Http\Request;
 
 class FaccaoController extends Controller
 {
-    protected $request;
-    public function _construct(Request $request){
+    public $request;
+    public  $faccao;
+    public function _construct(Request $request, Faccao $faccao){
         $this->request = $request;
+        $this->faccao  = $request;
     } 
     /**
      * Display a listing of the resource.
@@ -21,7 +23,7 @@ class FaccaoController extends Controller
     public function index()
     {
         $faccoes = Faccao::paginate(5);
-        return view('admin.pages.Faccoes.index', ['tarefas'=>$faccoes,]);
+        return view('admin.pages.Faccoes.index', ['faccoes'=>$faccoes,]);
         //dd('lista de fações');
     }
 
@@ -30,6 +32,9 @@ class FaccaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function create()
     {
         return view('admin.pages.Faccoes.create');
@@ -43,7 +48,10 @@ class FaccaoController extends Controller
      */
     public function store(Request $request)
     {
-        dd('cadastrando');
+        $dados = $request->except('_token');
+        //dd($dados);
+        Faccao::create($dados);
+        return redirect()->route('faccao.index');
     }
 
     /**
@@ -54,7 +62,18 @@ class FaccaoController extends Controller
      */
     public function show($id)
     {
-        //
+        $faccao = Faccao::find($id);
+        if($faccao)
+        {
+            return view('admin.pages.Faccoes.show', [
+                'faccao'=> $faccao
+            ]);
+        }
+        else 
+        {
+            dd($faccao);
+            return redirect()->back();
+        }
     }
 
     /**
@@ -65,7 +84,13 @@ class FaccaoController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.pages.faccao.edit', compact('id'));
+
+        $faccao = Faccao::find($id);
+        if($faccao)
+        {
+            return view('admin.pages.Faccoes.edit', compact('faccao'));
+        }
+        
     }
 
     /**
@@ -77,7 +102,14 @@ class FaccaoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd('editando $id');
+        $faccao = Faccao::find($id);
+        if($faccao)
+        {
+            $faccao->update($request->all());
+            return redirect()->route('faccao.index');
+            
+        }
+        return redirect()->back();
     }
 
     /**
@@ -88,6 +120,25 @@ class FaccaoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $faccao = Faccao::find($id);
+
+        if($faccao)
+        {
+            $faccao->delete();
+            return redirect()->route('faccao.index');
+        }
+        return redirect()->back();
+    }
+
+    public function search(Request $request)
+    {
+        $faccoes = $this->facao->search($request->facao);
+        $filtrados = $request->all();
+
+        return view('admin.pages.Faccoes.index', 
+                    [
+                        'tarefas'=>$faccoes,
+                        'filtrados'=>$filtrados,
+                    ]);
     }
 }

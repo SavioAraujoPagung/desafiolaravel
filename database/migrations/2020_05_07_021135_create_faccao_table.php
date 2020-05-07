@@ -13,15 +13,14 @@ class CreateFaccaoTable extends Migration
      */
     public function up()
     {
-        Schema::create('faccoes', function (Blueprint $table) {
+        Schema::create('faccaos', function (Blueprint $table) {
             $table->id();
             $table->string('nomeFantasia');
             $table->string('razaoSocial');
-            $table->string('endereço');
+            $table->string('endereco');
             $table->string('telefone');
             $table->string('cnpj');
-            $table->boolean('situacao'); 
-            $table->crypt('senha');   
+            $table->string('situacao');
             $table->timestamps();
         });
     }
