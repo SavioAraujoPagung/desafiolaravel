@@ -14,13 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::any('tarefas/search', 'ModelController\TarefaController@search')->name('tarefas.search');
-//Route::middleware([''])->group(function(){
-    Route::resource('usuario', 'ModelController\UsuarioController');
+Route::middleware(['auth'])->group(function(){
+    Route::resource('faccao', 'ModelController\FaccaoController');
     Route::resource('tarefa', 'ModelController\TarefaController');
     Route::resource('processo', 'ModelController\ProcessoController');
     Route::resource('modelo', 'ModelController\ModeloController');
     Route::resource('colecao', 'ModelController\ColecaoController');
-//});
+});
 
 Route::get('login', function () {
     return'login';
@@ -29,3 +29,7 @@ Route::get('login', function () {
 Route::get('/', function () {
     return view('iniciar.welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

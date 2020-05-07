@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\ModelController;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUpdateUsuarioRequest;
-use Ap\pModel\Usuario;
-use App\Usuario as AppUsuario;
+use App\Http\Requests\StoreUpdateFaccaoRequest;
+use App\Models\Faccao;
 use Illuminate\Http\Request;
 
-class UsuarioController extends Controller
+class FaccaoController extends Controller
 {
     protected $request;
     public function _construct(Request $request){
@@ -21,7 +20,9 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuario = new AppUsuario;
+        $faccoes = Faccao::paginate(5);
+        return view('admin.pages.Faccoes.index', ['tarefas'=>$faccoes,]);
+        //dd('lista de fações');
     }
 
     /**
@@ -31,13 +32,13 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.usuarios.create');
+        return view('admin.pages.Faccoes.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\StoreUpdateUsuarioRequest  $request
+     * @param  \Illuminate\Http\StoreUpdateFaccaoRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -64,7 +65,7 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.pages.usuarios.edit', compact('id'));
+        return view('admin.pages.faccao.edit', compact('id'));
     }
 
     /**
