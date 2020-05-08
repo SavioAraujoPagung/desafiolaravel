@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 Route::any('tarefas/search', 'ModelController\TarefaController@search')->name('tarefas.search');
 Route::any('faccoes/search', 'ModelController\FaccaoController@search')->name('faccoes.search');
+Route::any('colecoes/search', 'ModelController\colecaoController@search')->name('colecoes.search');
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', 'ModelController\FaccaoController@index')->name('admin');
 

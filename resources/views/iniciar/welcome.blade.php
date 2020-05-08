@@ -70,6 +70,7 @@
                     @auth
                         <a href="{{ route('faccao.index') }}">Facções</a>
                         <a href="{{ route('tarefa.index') }}">Tarefas</a>
+                        <a href="{{ route('colecao.index') }}">Coleções</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 

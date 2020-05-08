@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFaccaoTable extends Migration
+class CreateFaccoesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateFaccaoTable extends Migration
      */
     public function up()
     {
-        Schema::create('faccaos', function (Blueprint $table) {
+        Schema::create('faccoes', function (Blueprint $table) {
             $table->id();
             $table->string('nomeFantasia');
             $table->string('razaoSocial');

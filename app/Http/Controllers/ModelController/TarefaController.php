@@ -108,17 +108,7 @@ class TarefaController extends Controller
         
     }
     
-    public function search(Request $request)
-    {
-        $tarefas = $this->tarefa->search($request->filtro);
-        $filtrados = $request->except('_token');
-
-        return view('admin.pages.Tarefas.index', 
-                    [
-                        'tarefas'=>$tarefas,
-                        'filtrados'=>$filtrados,
-                    ]);
-    }
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -136,5 +126,17 @@ class TarefaController extends Controller
         }
         return redirect()->back();
         //dd("Deletando tarefa");
+    }
+
+    public function search(Request $request)
+    {
+        $tarefas = $this->tarefa->search($request->filtro);
+        $filtrados = $request->except('_token');
+
+        return view('admin.pages.Tarefas.index', 
+                    [
+                        'tarefas'=>$tarefas,
+                        'filtrados'=>$filtrados,
+                    ]);
     }
 }

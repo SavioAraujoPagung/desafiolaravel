@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Listar ')
+@section('title', 'Listar Facções')
 
 @section('content')
     <h1>Lista de Facções</h1>    
@@ -39,4 +39,5 @@
     @else
         {!!$faccoes->links()!!}
     @endif
+
 @endsection

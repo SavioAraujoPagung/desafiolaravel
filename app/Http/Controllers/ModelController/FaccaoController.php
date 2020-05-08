@@ -4,14 +4,14 @@ namespace App\Http\Controllers\ModelController;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateFaccaoRequest;
-use App\Models\Faccao;
+use App\Models\Faccoes;
 use Illuminate\Http\Request;
 
 class FaccaoController extends Controller
 {
     public $request;
     public  $faccao;
-    public function _construct(Request $request, Faccao $faccao){
+    public function _construct(Request $request, Faccoes $faccao){
         $this->request = $request;
         $this->faccao  = $request;
     } 
@@ -22,7 +22,8 @@ class FaccaoController extends Controller
      */
     public function index()
     {
-        $faccoes = Faccao::paginate(5);
+        //dd('lista de fações');
+        $faccoes = Faccoes::paginate(5);
         return view('admin.pages.Faccoes.index', ['faccoes'=>$faccoes,]);
         //dd('lista de fações');
     }
@@ -50,7 +51,7 @@ class FaccaoController extends Controller
     {
         $dados = $request->except('_token');
         //dd($dados);
-        Faccao::create($dados);
+        Faccoes::create($dados);
         return redirect()->route('faccao.index');
     }
 
@@ -62,7 +63,7 @@ class FaccaoController extends Controller
      */
     public function show($id)
     {
-        $faccao = Faccao::find($id);
+        $faccao = Faccoes::find($id);
         if($faccao)
         {
             return view('admin.pages.Faccoes.show', [
@@ -85,7 +86,7 @@ class FaccaoController extends Controller
     public function edit($id)
     {
 
-        $faccao = Faccao::find($id);
+        $faccao = Faccoes::find($id);
         if($faccao)
         {
             return view('admin.pages.Faccoes.edit', compact('faccao'));
@@ -102,7 +103,7 @@ class FaccaoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $faccao = Faccao::find($id);
+        $faccao = Faccoes::find($id);
         if($faccao)
         {
             $faccao->update($request->all());
@@ -120,7 +121,7 @@ class FaccaoController extends Controller
      */
     public function destroy($id)
     {
-        $faccao = Faccao::find($id);
+        $faccao = Faccoes::find($id);
 
         if($faccao)
         {
@@ -132,7 +133,7 @@ class FaccaoController extends Controller
 
     public function search(Request $request)
     {
-        $faccoes = $this->facao->search($request->facao);
+        $faccoes = $this->faccao->search($request->faccao);
         $filtrados = $request->all();
 
         return view('admin.pages.Faccoes.index', 

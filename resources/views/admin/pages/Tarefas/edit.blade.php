@@ -3,9 +3,9 @@
 @section('title', 'Editar Tarefa')
 
 @section('content')
-<h1>Editar Produto </h1>
-<a href={{route('tarefa.index')}}><< Voltar </a>
-<hr>
+    <h1>Editar Tarefa </h1>
+    <a href={{route('tarefa.index')}}><< Voltar </a>
+    <hr>
 
     <form action="{{route('tarefa.update', $tarefa->id)}}" method="post" enctype="multipart/form-data">
         @method("put")
