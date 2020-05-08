@@ -1,45 +1,51 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Listar Coleções')
+@section('title', 'Listar Modelo')
 
 @section('content')
-    <h1>Lista de Coleções</h1>    
-    <a href="{{route('colecao.create')}}" class="btn btn-primary">Cadastrar</a>
+    <h1>Lista de Modelo</h1>    
+    <a href="{{route('modelo.create')}}" class="btn btn-primary">Cadastrar</a>
     <hr>
     
-    <form action="{{route('colecoes.search')}}" method="POST" class="form form-inline">
+    <form action="{{route('modelos.search')}}" method="POST" class="form form-inline">
         @csrf
-        <input type="text" name="filtro" placeholder="Nome da Coleção" class="form control" value="{{$filtrados['filtro'] ?? ''}}"> <br><br>
+        <input type="text" name="filtro" placeholder="Nome da Modelo" class="form control" value="{{$filtrados['filtro'] ?? ''}}"> <br><br>
         <button type="submit" class="btn btn-info">Filtrar</button>
     </form>
 
     <table class = "table table-striped table-dark" >
-        <thead >
+        <thead>
             <tr>
-                <th>Nome</th>
-                <th>Descrição</th>
-                <th>Data de Lançamento</th>
-                <th with="100">Ações</th>
+                <td>Imagem</td>
+                <td>Nome</td>
+                <td>Coleções</td>
+                <td>Quantidade</td>
+                <td>Ações</td>
             </tr>
+
         </thead>
         <tbody>
-
-
-            @foreach ($colecoes as $colecao)
+            @foreach ($modelos as $modelo)
                 <tr>
-                    <td>{{ $colecao->nome }}</td>
-                    <td>{{ $colecao->descricao }}</td>
-                    <td>{{ $colecao->dataDeLancamento}}</td>
-                    <td><a href={{route('colecao.show', $colecao->id)}}>Informações</a></td>
-                    <td><a href={{route('colecao.edit', $colecao->id)}}>Editar</a></td>
+                    <td>
+                        
+                        @if ($modelo->image)
+                            <img src="{{url("storage/{$modelo->image}")}}" alt="{{$modelo->image}}" style="max-width: 100px">
+                        @endif
+                    </td>
+                    <td>{{ $modelo->nome }}</td>
+                    <td>{{ $modelo->colecao }}</td>
+                    <td>{{ $modelo->quantidade }}</td>
+                    <td><a href={{route('modelo.show', $modelo->id)}}>Informações</a></td>
+                    <td><a href={{route('modelo.edit', $modelo->id)}}>Editar</a></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     @if (isset($filtrados))
-        {!!$colecoes->appends($filtrados)->links()!!}
+        {!!$modelos->appends($filtrados)->links()!!}
     @else
-        {!!$colecoes->links()!!}
+        {!!$modelos->links()!!}
     @endif
     
 @endsection

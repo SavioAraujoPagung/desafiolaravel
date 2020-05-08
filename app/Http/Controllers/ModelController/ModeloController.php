@@ -4,9 +4,20 @@ namespace App\Http\Controllers\ModelController;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Modelo;
 
 class ModeloController extends Controller
 {
+    public $request;
+    public  $modelo;
+
+
+    public function __construct(Request $request, Modelo $modelo)
+    {
+        $this->request = $request;
+        $this->modelo  =  $modelo;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +25,8 @@ class ModeloController extends Controller
      */
     public function index()
     {
-        //
+        $modelos = Modelo::paginate(5);
+        return view('admin.pages.Modelo.index', ['modelos'=>$modelos,]);
     }
 
     /**
@@ -24,7 +36,7 @@ class ModeloController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.Modelo.create');
     }
 
     /**
@@ -35,7 +47,24 @@ class ModeloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = $request->only('nome', 
+                                'descricao', 
+                                'dataLancamento', 
+                                'quantidade', 
+                                'colecao',
+                                'image'
+                            );
+
+        
+        if ($request->hasFile('image')&&$request->image->isValid())
+        {
+            $imagePath = $request->image->store('modelo');
+            $dados ['image'] = $imagePath;
+        }
+
+        Modelo::create($dados);
+        return redirect()->route('modelo.index');
+
     }
 
     /**
@@ -46,7 +75,17 @@ class ModeloController extends Controller
      */
     public function show($id)
     {
-        //
+        $modelo = Modelo::find($id);
+        if($modelo)
+        {
+            return view('admin.pages.Modelo.show', [
+                'modelo'=> $modelo
+            ]);
+        }
+        else 
+        {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -57,7 +96,12 @@ class ModeloController extends Controller
      */
     public function edit($id)
     {
-        //
+        $modelo = Modelo::find($id);
+        if($modelo)
+        {   
+            return view('admin.pages.Modelo.edit', compact('modelo'));
+        }
+        
     }
 
     /**
@@ -69,7 +113,14 @@ class ModeloController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $modelo = Modelo::find($id);
+        if($modelo)
+        {
+            $modelo->update($request->all());
+            return redirect()->route('modelo.index');
+            
+        }
+        return redirect()->back();
     }
 
     /**
@@ -80,6 +131,13 @@ class ModeloController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $modelo = Modelo::find($id);
+
+        if($modelo)
+        {
+            $modelo->delete();
+            return redirect()->route('modelo.index');
+        }
+        return redirect()->back();
     }
 }

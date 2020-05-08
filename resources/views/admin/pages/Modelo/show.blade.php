@@ -3,17 +3,19 @@
 @section('title', 'Destalhes da Coleção ')
 
 @section('content')
-    <h1>Detalhes da Coleção</h1>
-    <a href={{route('colecao.index')}}><< Voltar </a>
+    <h1>Detalhes da Modelo</h1>
+    <a href={{route('modelo.index')}}><< Voltar </a>
     <hr>
+    
     <ul>
-        <li>Id: {{$colecao->id}}</li>
-        <li>Nome: {{$colecao->nome}}</li>
-        <li>Descricao: {{$colecao->descricao}}</li>
-        <li>Data Lançamento: {{$colecao->dataLancamento}}</li>
+        <li>Id: {{$modelo->id}}</li>
+        <li>Nome: {{$modelo->nome}}</li>
+        <li>Descricao: {{$modelo->descricao}}</li>
+        <li>Data Lançamento: {{$modelo->dataLancamento}}</li>
+        <li>Imagem: {{$modelo->imagem}}</li>
     </ul>
     
-    <form action="{{route('colecao.destroy', $colecao->id)}}" method="POST">
+    <form action="{{route('modelo.destroy', $modelo->id)}}" method="POST">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-danger">DELETAR</button>
