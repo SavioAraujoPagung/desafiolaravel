@@ -4,6 +4,10 @@ namespace App\Http\Controllers\ModelController;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Modelo;
+use App\Models\Processo;
+use App\Models\Tarefa;
+use App\Models\Faccoes;
 
 class ProcessoController extends Controller
 {
@@ -14,7 +18,8 @@ class ProcessoController extends Controller
      */
     public function index()
     {
-        //
+        $processos = Processo::paginate(5);
+        return view('admin.pages.Processo.index', ['processos'=>$processos,]);
     }
 
     /**
@@ -24,7 +29,15 @@ class ProcessoController extends Controller
      */
     public function create()
     {
-        //
+        $modelos = Modelo::all();
+        $tarefas = Tarefa::all();
+        $faccoes  = Faccoes::all();
+
+        return view('admin.pages.Processo.create', ['modelos' => $modelos, 
+                                                    'tarefas' => $tarefas,
+                                                    'faccoes' => $faccoes,
+                                                   ]
+                                                   );
     }
 
     /**
@@ -35,7 +48,15 @@ class ProcessoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $dados = $request->only('tarefa',
+                                'faccao',
+                                'modelo',
+                                'quantidade');
+
+        Processo::create($dados);
+        return redirect()->route('processo.index');
+        /**/
     }
 
     /**
@@ -46,7 +67,17 @@ class ProcessoController extends Controller
      */
     public function show($id)
     {
-        //
+        $processo = Processo::find($id);
+        if($processo)
+        {
+            return view('admin.pages.Processo.show', [
+                'processo'=> $processo
+            ]);
+        }
+        else 
+        {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -57,7 +88,19 @@ class ProcessoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $processo = Processo::find($id);
+        $modelos  = Modelo::all();
+        $tarefas  = Tarefa::all();
+        $faccoes  = Faccoes::all();
+        
+        if($processo)
+        {   
+            return view('admin.pages.Processo.edit', ['processo' => $processo, 
+                                                        'modelos' => $modelos,
+                                                        'tarefas' => $tarefas, 
+                                                        'faccoes' => $faccoes, ]); 
+
+        }
     }
 
     /**
@@ -69,7 +112,14 @@ class ProcessoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $processo = Processo::find($id);
+        if($processo)
+        {
+            $processo->update($request->all());
+            return redirect()->route('processo.index');
+            
+        }
+        return redirect()->back();
     }
 
     /**
@@ -80,6 +130,13 @@ class ProcessoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $processo = Processo::find($id);
+
+        if($processo)
+        {
+            $processo->delete();
+            return redirect()->route('processo.index');
+        }
+        return redirect()->back();
     }
 }

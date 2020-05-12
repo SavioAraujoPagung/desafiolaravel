@@ -68,9 +68,11 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ route('faccao.index') }}">Facções</a>
-                        <a href="{{ route('tarefa.index') }}">Tarefas</a>
+                        <a href="{{ route('faccao.index') }}"> Facções</a>
+                        <a href="{{ route('tarefa.index') }}"> Tarefas</a>
                         <a href="{{ route('colecao.index') }}">Coleções</a>
+                        <a href="{{ route('modelo.index') }}"> Modelos</a>
+                        <a href="{{ route('processo.index') }}"> Processos</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 

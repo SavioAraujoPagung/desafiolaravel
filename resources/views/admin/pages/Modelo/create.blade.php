@@ -13,8 +13,13 @@
         <div class="form-group"><input type="text"   name = "nome"           placeholder="Nome"> </div>
         <div class="form-group"><input type="text"   name = "descricao"      placeholder="Descrição"> </div>
         <div class="form-group"><input type="text"   name = "dataLancamento" placeholder="Data Lançamento"> </div>
-        <div class="form-group"><input type="text"   name = "colecao"        placeholder="Coleções"> </div>
         <div class="form-group"><input type="number" name = "quantidade"     placeholder="Quantidade"> </div>
+
+        <select name="colecao" id="colecao">
+            @foreach ($colecoes as $colecao)
+                <option value="{{ $colecao->nome }}">{{ $colecao->nome }}</option>
+            @endforeach
+        </select>
         <div class="form-group"><button type="submit">Cadastrar</button> 
     </form>
 @endsection

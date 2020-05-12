@@ -3,7 +3,7 @@
 @section('title', 'Editar Modelo')
 
 @section('content')
-    <h1>Editar Modelo </h1>
+    <h1>Editar Modelo</h1>
     <a href={{route('modelo.index')}}><< Voltar </a>
     <hr>
 
@@ -15,7 +15,13 @@
         <div class="form-group"><input type="text"   name = "nome"           placeholder="Nome"            value={{$modelo->nome}}></div>
         <div class="form-group"><input type="text"   name = "descricao"      placeholder="Descrição"       value={{$modelo->descricao}}></div>
         <div class="form-group"><input type="text"   name = "dataLancamento" placeholder="Data Lançamento" value={{$modelo->dataLancamento}}></div>
-        <div class="form-group"><input type="text"   name = "colecao"        placeholder="Coleção"         value={{$modelo->colecao}}></div>
+        
+        <select name="colecao" id="colecao">
+            @foreach ($colecoes as $colecao)
+                <option value="{{ $colecao->nome }}"></option>
+            @endforeach
+        </select>
+
         <div class="form-group"><input type="number" name = "quantidade"     placeholder="quantidade"      value={{$modelo->quantidade}}></div>
 
         <div class="form-group"><button type="submit">Editar</button> 

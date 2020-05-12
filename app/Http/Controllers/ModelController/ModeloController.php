@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ModelController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Modelo;
+use App\Models\Colecoes;
 
 class ModeloController extends Controller
 {
@@ -36,7 +37,8 @@ class ModeloController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.Modelo.create');
+        $colecoes = Colecoes::all();
+        return view('admin.pages.Modelo.create', ['colecoes'=>$colecoes,]);
     }
 
     /**
@@ -96,10 +98,12 @@ class ModeloController extends Controller
      */
     public function edit($id)
     {
-        $modelo = Modelo::find($id);
+        $modelo   = Modelo::find($id);
+        $colecoes = Colecoes::all();
+        
         if($modelo)
         {   
-            return view('admin.pages.Modelo.edit', compact('modelo'));
+            return view('admin.pages.Modelo.edit', compact('modelo'), compact('colecoes'));
         }
         
     }

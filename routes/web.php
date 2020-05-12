@@ -17,6 +17,7 @@ Route::any('tarefas/search', 'ModelController\TarefaController@search')->name('t
 Route::any('faccoes/search', 'ModelController\FaccaoController@search')->name('faccoes.search');
 Route::any('colecoes/search', 'ModelController\colecaoController@search')->name('colecoes.search');
 Route::any('modelos/search', 'ModelController\ModeloController@search')->name('modelos.search');
+Route::any('processos/search', 'ModelController\ProcessoController@search')->name('processos.search');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', 'ModelController\FaccaoController@index')->name('admin');
